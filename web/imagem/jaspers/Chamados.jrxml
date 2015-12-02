@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Chamados" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="539" leftMargin="28" rightMargin="28" topMargin="19" bottomMargin="19" uuid="a20ec4eb-da87-459f-a2d5-3357a1666696">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="1.4641000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="idVazio" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select tipo_ocorrencia.nome as nome, count(tipo_ocorrencia.nome) as qtde, (select COUNT(*)from ocorrencia) as total,
+round(((count(tipo_ocorrencia.nome)*100.00)/(select COUNT(*)from ocorrencia)),2) as porcentagem
+from ocorrencia
+inner join tipo_ocorrencia on tipo_ocorrencia_fk = tipo_ocorrencia.id
+group by tipo_ocorrencia.nome having 1 = $P{idVazio}]]>
+	</queryString>
+	<field name="nome" class="java.lang.String"/>
+	<field name="qtde" class="java.lang.Long"/>
+	<field name="total" class="java.lang.Long"/>
+	<field name="porcentagem" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="92" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="264b3afe-d44f-4b3b-af17-16b9161258d3" key="staticText-8" x="1" y="34" width="539" height="27" forecolor="#000066"/>
+				<textElement textAlignment="Center">
+					<font fontName="Verdana" size="22" isBold="true" isItalic="true" isUnderline="false" pdfFontName="Helvetica-BoldOblique"/>
+				</textElement>
+				<text><![CDATA[Relatório de Chamados Abertos ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="0ae60f10-0119-4d8b-b12f-6f5cf7887bad" key="rectangle-5" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="1" width="539" height="27" forecolor="#333333" backcolor="#FFFFFF"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="48bae350-7f11-4af3-b801-a5db126a9493" key="staticText-8" x="0" y="61" width="277" height="27" forecolor="#000066"/>
+				<textElement textAlignment="Right">
+					<font fontName="Verdana" size="22" isBold="true" isItalic="true" isUnderline="false" pdfFontName="Helvetica-BoldOblique"/>
+				</textElement>
+				<text><![CDATA[Total - ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="dd009565-1492-478a-b275-d9d8674a4fe8" key="textField" x="277" y="61" width="262" height="27" forecolor="#000066"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Verdana" size="22" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement uuid="8f96b483-9948-4068-a7af-c05bc23a4a27" key="rectangle-5" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="34" width="539" height="27" forecolor="#333333" backcolor="#FFFFFF"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="d50f3651-f227-487b-bfa4-3b9108722324" key="staticText-8" x="1" y="0" width="539" height="27" forecolor="#000066"/>
+				<textElement textAlignment="Center">
+					<font fontName="Verdana" size="22" isBold="true" isItalic="true" isUnderline="false" pdfFontName="Helvetica-BoldOblique"/>
+				</textElement>
+				<text><![CDATA[ReportHere - Ouvidoria]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="19" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="0d161fd5-1153-49ae-b43e-a9c2fbbdbfca" key="rectangle-1" x="0" y="0" width="539" height="18" forecolor="#333333" backcolor="#999999"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="21b7e73f-6a92-4855-86e7-970db724e57b" key="staticText-7" x="1" y="2" width="186" height="15" forecolor="#333333"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Tipo de Chamado]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="04917a44-ecbd-430d-861f-39c0efb837ea" key="line-13" x="188" y="0" width="1" height="18" forecolor="#333333"/>
+			</line>
+			<line>
+				<reportElement uuid="e0b90530-54ec-4d23-b7fb-86822ce0b6e1" key="line-18" x="393" y="0" width="1" height="18" forecolor="#333333"/>
+			</line>
+			<staticText>
+				<reportElement uuid="6242d3ca-7a6c-4c81-ac3b-0c4fcb1640f8" key="staticText-11" x="191" y="1" width="200" height="15" forecolor="#333333"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Número de Ocorrências]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7d3100b7-e0b0-40eb-ac1e-eaae8a82dab7" key="staticText-12" x="396" y="2" width="140" height="15" forecolor="#333333"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Porcentagem]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="5b333ecb-cbc2-4fed-b8d4-fb5fc0d6c033" key="rectangle-2" stretchType="RelativeToTallestObject" x="0" y="0" width="539" height="18" forecolor="#CCCCCC" backcolor="#CCCCCC">
+					<printWhenExpression><![CDATA[new Boolean( $V{COLUMN_COUNT}.intValue() % 2 == 0 )]]></printWhenExpression>
+				</reportElement>
+				<graphicElement fill="Solid">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<line>
+				<reportElement uuid="d7594650-cd01-4dc1-8ab0-0a2aa5d3ee34" key="line-6" x="393" y="0" width="1" height="18" forecolor="#333333"/>
+			</line>
+			<line>
+				<reportElement uuid="92d4a88c-fb49-4b7a-9259-c5db89e4e643" key="line-16" x="188" y="0" width="1" height="18" forecolor="#333333"/>
+			</line>
+			<rectangle>
+				<reportElement uuid="dff6fcec-f6ef-43dc-8c04-cca5b693a9e2" key="rectangle-4" mode="Transparent" x="0" y="0" width="539" height="18"/>
+			</rectangle>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="3cddc5cb-637a-4b96-8a49-0bd1f2ed5d30" key="textField" x="191" y="-2" width="200" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qtde}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="73b9aa04-07e8-4d65-b144-6eea02015198" key="textField" x="1" y="3" width="186" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,## %" isBlankWhenNull="true">
+				<reportElement uuid="6b37d877-1d65-46c9-bb93-309bb53f6e25" key="textField" x="396" y="3" width="140" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{porcentagem}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="47" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="b75192f8-6a01-4101-b1cd-61f462c258e8" key="rectangle-3" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="12" width="539" height="34" forecolor="#333333" backcolor="#FFFFFF"/>
+			</rectangle>
+			<line>
+				<reportElement uuid="5d1e8900-31de-4d5d-96b3-3e0ff232cae8" key="line-12" x="1" y="5" width="538" height="3" forecolor="#333333"/>
+			</line>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="1fcc2c02-5134-40ca-9771-4f38bafeda8f" key="textField" x="453" y="26" width="35" height="12" forecolor="#333333"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}.toString()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" isBlankWhenNull="false">
+				<reportElement uuid="6bdf6579-416f-4fb8-b518-c7f0d2289a36" key="textField" x="501" y="26" width="35" height="12" forecolor="#333333"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+$V{PAGE_NUMBER}+""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="59eb5266-d266-43b2-a4f6-a6381d9b4653" key="staticText-9" x="491" y="26" width="9" height="12" forecolor="#333333"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[/]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

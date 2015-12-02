@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fe0d3920-9a5d-41b2-8261-3a2009bafe05">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUB_NEW" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.net.URL">
+		<defaultValueExpression><![CDATA[$P{SUBREPORT_DIR}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from item]]>
+	</queryString>
+	<field name="id" class="java.lang.Long"/>
+	<field name="pedido_fk" class="java.lang.Long"/>
+	<field name="produto_fk" class="java.lang.Long"/>
+	<field name="data_hora" class="java.sql.Timestamp"/>
+	<field name="quantidade" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="5f4e8e11-8b77-46c0-9479-9f9c606a2b8c" x="29" y="0" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[id]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<textField>
+				<reportElement uuid="73d4a388-a5cf-4cfe-83f4-3df7c07d514f" x="29" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="645f0082-8b59-46cb-80e5-fcfa815f27c8" x="162" y="0" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[quantidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1cde2974-6145-4232-bc7a-075128f7c5e2" x="306" y="0" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[pedido_fk]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="100" splitType="Stretch">
+			<subreport>
+				<reportElement uuid="baaa04b2-d1c6-4004-b922-eaf319a374a4" x="0" y="49" width="555" height="51"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement uuid="9c228c60-eba3-4c23-8e67-7663a6aaa12c" x="162" y="20" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{quantidade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="cdd1675d-f698-4d59-bdb3-78aa18059ea5" x="306" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{pedido_fk}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="78" splitType="Stretch"/>
+	</summary>
+</jasperReport>
